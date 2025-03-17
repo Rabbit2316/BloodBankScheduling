@@ -7,4 +7,8 @@ public class Appointment {
     public boolean isPaid(){
         return this.isPaid;
     }
+
+    public void moveToMissedAppointments() {
+
+    }
 }
