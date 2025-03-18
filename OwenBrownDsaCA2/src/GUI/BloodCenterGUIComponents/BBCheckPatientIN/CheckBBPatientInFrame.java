@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package GUI;
+package GUI.BloodCenterGUIComponents.BBCheckPatientIN;
 
+import GUI.BloodCenterGUIComponents.BBCheckPatientIN.CheckBBPatientInPanel;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
@@ -11,17 +12,16 @@ import javax.swing.JFrame;
  *
  * @author owen
  */
-public class CheckoutPatientFrame extends JFrame {
-    CheckoutPatientPanel panel;
-    public CheckoutPatientFrame() {
-        setTitle("ENTER PATIENT PPSN");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+public class CheckBBPatientInFrame extends JFrame {
+    public CheckBBPatientInPanel panel;
+    public CheckBBPatientInFrame() {
+          setTitle("CHECK PATIENT IN");
+          panel = new CheckBBPatientInPanel();
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
         setLocationRelativeTo(null);
-        setVisible(true);
         setLayout(new BorderLayout());
-        
-        panel = new CheckoutPatientPanel();
         add(panel, BorderLayout.CENTER);
+        setVisible(true);
     }
 }

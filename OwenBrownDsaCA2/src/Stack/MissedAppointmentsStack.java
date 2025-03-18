@@ -1,5 +1,7 @@
 package Stack;
 
+import ApplicationLogic.Appointment;
+
 public class MissedAppointmentsStack extends MyStack {
     
     public MissedAppointmentsStack() {
@@ -11,7 +13,7 @@ public class MissedAppointmentsStack extends MyStack {
         Object appointment = peek();
         if(appointment instanceof Appointment) {
             Appointment app = (Appointment) appointment;
-            if(app.isPaid()) {
+            if(app.isIsPaid()) {
                 theStack.remove(theStack.size()-1);
                 return app;
             }

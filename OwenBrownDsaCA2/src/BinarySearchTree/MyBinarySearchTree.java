@@ -1,6 +1,8 @@
 package BinarySearchTree;
 
 import ApplicationLogic.Patient;
+import java.awt.List;
+import java.util.ArrayList;
 
 public class MyBinarySearchTree implements BinarySearchTreeInterface {
 
@@ -132,4 +134,20 @@ public class MyBinarySearchTree implements BinarySearchTreeInterface {
         postOrderTraversal(node.rightChild);
         System.out.print(node.getValue() + " ");
     }
+public ArrayList<Patient> getAllPatients() {
+    ArrayList<Patient> patients = new ArrayList<>();
+    inOrderTraverseAndAddPatients(root, patients);
+    return patients;
 }
+
+private void inOrderTraverseAndAddPatients(BinarySearchTreeNode node, ArrayList<Patient> patients) {
+    if (node == null) {
+        return;
+    }
+    inOrderTraverseAndAddPatients(node.leftChild, patients);  // Traverse left subtree
+    patients.add((Patient) node.getData());  // Add the patient to the list
+    inOrderTraverseAndAddPatients(node.rightChild, patients);  // Traverse right subtree
+}
+
+}
+

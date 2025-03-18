@@ -4,6 +4,9 @@
  */
 package ApplicationLogic;
 
+import DoubleLinkedList.MyDoubleLinkedList;
+import DoubleLinkedList.Node;
+import Stack.MyStack;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -17,12 +20,16 @@ public class Patient {
    private int ppsn;
    private GP gp;
    private LocalDate dateOfBirth;
+   private MyDoubleLinkedList allAppointments;
+   public MyStack missedAppointments;
 
     public Patient(String name, int ppsn, GP gp, LocalDate dateOfBirth) {
+        allAppointments = new MyDoubleLinkedList();
         this.name = name;
         this.ppsn = ppsn;
         this.gp = gp;
         this.dateOfBirth = dateOfBirth;
+        missedAppointments = new MyStack();
     }
     
     //DLL
@@ -58,6 +65,11 @@ public class Patient {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+    
+    public void addAppointment(Appointment app) {
+        Node node = new Node(app);
+        this.allAppointments.add(node);
     }
     
 }

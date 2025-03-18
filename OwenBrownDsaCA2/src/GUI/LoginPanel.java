@@ -4,6 +4,10 @@
  */
 package GUI;
 
+import GUI.BloodCenterGUIComponents.BloodCenterPanel;
+import GUI.MainFrame;
+import java.time.LocalDate;
+
 /**
  *
  * @author owen
@@ -13,7 +17,7 @@ public class LoginPanel extends javax.swing.JPanel {
     /**
      * Creates new form LoginPanel
      */
-    MainFrame mainFrame;
+    public static MainFrame mainFrame;
     public LoginPanel(MainFrame f) {
         initComponents();
         this.mainFrame = f;
@@ -43,6 +47,11 @@ public class LoginPanel extends javax.swing.JPanel {
         });
 
         jButton2.setText("Blood Bank");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel1.setText("LOGIN AS:");
@@ -76,11 +85,17 @@ public class LoginPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println("firiing"); 
         mainFrame.cardLayout.show(mainFrame.mainPanel, "gpHomePanel");
         mainFrame.revalidate();
         mainFrame.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        BloodCenterPanel.bts.login(LocalDate.now());
+        mainFrame.cardLayout.show(mainFrame.mainPanel, "bloodCenterPanel");
+        mainFrame.revalidate();
+        mainFrame.repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

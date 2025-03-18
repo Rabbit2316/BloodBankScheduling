@@ -2,8 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ApplicationLogic;
+package ApplicationLogic.Databases;
 
+import ApplicationLogic.GP;
+import ApplicationLogic.Patient;
 import BinarySearchTree.BinarySearchTreeNode;
 import BinarySearchTree.MyBinarySearchTree;
 import java.time.LocalDate;

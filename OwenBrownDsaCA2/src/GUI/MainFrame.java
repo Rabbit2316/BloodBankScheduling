@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import GUI.BloodCenterGUIComponents.BloodCenterPanel;
+import GUI.GPGUIComponents.GPHomePanel;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -19,6 +21,7 @@ public class MainFrame extends JFrame {
     public CardLayout cardLayout;
     LoginPanel loginPanel;
     public static GPHomePanel gpHomePanel;
+    public static BloodCenterPanel bloodCenterPanel;
     public MainFrame() {
         setTitle("Blood Bank Application");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,9 +41,11 @@ public class MainFrame extends JFrame {
         loginPanel.setSize(700, 700);
         
         gpHomePanel = new GPHomePanel();
+        bloodCenterPanel = new BloodCenterPanel();
    
         mainPanel.add(gpHomePanel, "gpHomePanel");
         mainPanel.add(loginPanel, "loginPanel");
+        mainPanel.add(bloodCenterPanel, "bloodCenterPanel");
         cardLayout.show(mainPanel, "loginPanel");
         
         add(mainPanel, BorderLayout.CENTER);

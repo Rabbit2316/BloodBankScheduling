@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package GUI;
+package GUI.GPGUIComponents;
 
+import GUI.GPGUIComponents.CheckoutPatientFrame;
 import ApplicationLogic.MyMain;
 import ApplicationLogic.Patient;
+import GUI.MainFrame;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
