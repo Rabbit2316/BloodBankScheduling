@@ -1,5 +1,6 @@
 package DoubleLinkedList;
 
+//DLL Node.
 public class Node {
     private Object data;
     private Node prev;

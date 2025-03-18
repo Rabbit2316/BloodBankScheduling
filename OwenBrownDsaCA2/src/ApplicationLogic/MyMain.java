@@ -1,35 +1,29 @@
 package ApplicationLogic;
-
-
-
 import ApplicationLogic.Databases.PatientDatabase;
 import ApplicationLogic.Databases.BloodTestBookingDatabase;
 import GUI.MainFrame;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-
-
-/**
- *
- * @author owen
- */
+//Main class with main method
 public class MyMain {
 
+    //Declaring the database classes
+    public static PatientDatabase db; //Binary Search Tree holding instances of Patient, sorted by PPSN.
+    public static BloodTestBookingDatabase bloodTestDB;//HashMap of LocalDates and Stacks<Appointment>, holding appointments by date.
     
-    public static PatientDatabase db;
-    public static BloodTestBookingDatabase bloodTestDB;
+    //Main method
     public static void main(String[] args) {
+        
+        //Main GUI Frame
         MainFrame frame = new MainFrame();
         
+        //Initializing the databases.
         db = new PatientDatabase();
         bloodTestDB = new BloodTestBookingDatabase();
         
+        //Creating instance of system scheduler that checks for late appointments every 30 minutes, and moves to late queue in BloodTestCenter..
         AppointmentChecker appointmentChecker = new AppointmentChecker();
 
-        // Start checking appointments every 30 minutes
+        //Starting the scheduler.
         appointmentChecker.startCheckingAppointments();
     }
     

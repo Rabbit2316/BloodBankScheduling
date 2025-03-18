@@ -1,5 +1,6 @@
 package BinarySearchTree;
 
+//Simple BST interface.
 public interface BinarySearchTreeInterface {
         void insert(BinarySearchTreeNode newNode);
         Object delete(BinarySearchTreeNode node, int value);

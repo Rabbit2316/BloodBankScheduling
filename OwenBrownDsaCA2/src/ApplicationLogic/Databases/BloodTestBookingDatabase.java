@@ -12,30 +12,39 @@ import java.time.Month;
 import java.util.HashMap;
 import java.util.List;
 
+//This is the class serving as a database for all appointments booked with the blood center. It runs off a hash map with a date kay, and stack of appointments value. 
+//It holds appointments for any given date in the stack, then empties it into todaysAppointments in the BloodCenterTest on the first login of the day.
 public class BloodTestBookingDatabase {
     
+    //Declaring the hashmap 
     HashMap<LocalDate, MyStack> db;
 
+    //Constructor
     public BloodTestBookingDatabase() {
         this.db = new HashMap<>();
-        addAppointmentsForPatients();  // Add appointments for patients (e.g., for the whole month)
+        addAppointmentsForPatients();  //Created with the assistance of generative AI. This method populates the hashMap.
     }
 
-    // Method to schedule an appointment
+    //This method is called whenever an appointment is scheduled. In-app, this is through the GP login -> book blood test.
     public boolean scheduleAppointment(Appointment a) {
+        //Getting the date of the appointment
         LocalDateTime ldt = a.getTime();
         LocalDate ld = ldt.toLocalDate();
+        
+        //If an appointment for that date has already been created
         if (db.containsKey(ld)) {
-            db.get(ld).push(a);
+            db.get(ld).push(a);//Add it to the stack
             return true;
-        } else {
-            db.put(ld, new MyStack());
-            db.get(ld).push(a);
+        } 
+        else { //If first appointment for that date
+            db.put(ld, new MyStack());//Create an entry in the hash map for it with a new stack. 
+            db.get(ld).push(a); //Push the appointment into it.
             return true;
         }
     }
 
-    // Method to cancel an appointment
+    //Method to cancel an appointment. Half-implemented as it can only be done as soon as the appointment is added as its a stack. 
+    //Option for doctor to cancel qucikly incase they enetered wrong information.
     public void cancelAppointment(Appointment a) {
         LocalDateTime ldt = a.getTime();
         LocalDate ld = ldt.toLocalDate();
@@ -44,49 +53,50 @@ public class BloodTestBookingDatabase {
         }
     }
 
-    // Method to load today's appointments
+    //This is the method that takes all the appointments for any given day, and loads them into the BloodTestCenter.
     public void loadTodaysApps(LocalDate date) {
         if (db.containsKey(date)) {
             MyStack stack = db.get(date);
             System.out.println(stack.isEmpty());
             while (!stack.isEmpty()) {
-                BloodTestCenter.todaysApps.add((Appointment) stack.pop());
-                System.out.println("LOADING SINGLE APPOINTMENT");
+                Appointment app = (Appointment) stack.pop();
+                BloodTestCenter.todaysApps.add(app);
+                System.out.println("Appointment added: "+app.toString());
             }
         }
     }
 
-    // Method to add appointments for all patients (example: for a month)
+    //Created with the assistance of generative AI. This autopopulates the database.
     private void addAppointmentsForPatients() {
+        
+        //Setting dates for autopopulation. 
         LocalDate startDate = LocalDate.of(2025, Month.MARCH, 1);
         LocalDate endDate = LocalDate.of(2025, Month.MARCH, 31);
         
-        // Loop through every day in March
-        for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {
-            // Create a stack for the day if it's not already in the database
+        //Looping through each day in the range.
+        for (LocalDate date = startDate; !date.isAfter(endDate); date = date.plusDays(1)) {//date = startdate, while less than end date, date+1 day.
+            
+            //Creating the database entry for that day
             if (!db.containsKey(date)) {
                 db.put(date, new MyStack());
             }
             
-            // Start adding appointments after 4pm every half hour
+            //Setting the time for appointments to start being added at
             LocalDateTime appointmentTime = date.atTime(16, 0);  // 4:00 PM
             
-            // Get all patients from the PatientDatabase
+            //Pulling all patients from the patients binary search tree as a list. We will create one appointment for each one each day.
             List<Patient> patients = MyMain.db.DB.getAllPatients();
             
-            // Create an appointment for each patient
+            //Creating said appointments
             for (Patient patient : patients) {
-                // Schedule appointments every half hour
-                Appointment appointment = new Appointment(
-                        patient,  // Patient from the list
-                        new GP(), // Dummy GP for now
-                        appointmentTime
-                );
+                
+                //Creating the patient's appointment.
+                Appointment appointment = new Appointment( patient, new GP(), appointmentTime);
 
-                // Add the appointment to the stack for the specific date
+                //Adding it to the stack.
                 db.get(date).push(appointment);
 
-                // Increment the appointment time by 30 minutes
+                //Movin the timer up 30 minutes.
                 appointmentTime = appointmentTime.plusMinutes(30);
             }
         }

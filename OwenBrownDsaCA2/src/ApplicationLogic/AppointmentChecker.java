@@ -1,7 +1,5 @@
 package ApplicationLogic;
 
-import ApplicationLogic.Appointment;
-import ApplicationLogic.BloodTestCenter;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
@@ -9,40 +7,51 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+//This class runs every 30 minutes, and checks for late appointments in BloodTestCenter.todaysAppointments - simple list of all appointments booked today. 
+//If any are late, it moves them to BloodTestCenter.lateAppointments - queue fixed size 5. Replaces oldest element on add after that.
+//My initial idea was to run an infinite while loop on a second thread that kept log of time and executes after a set time passes, but
+//That seemed resource intensive for this not-exectly real-time functionality, so this is the solution I went with. This was coded
+//And conceptualized with the assistance of generative AI. 
 public class AppointmentChecker {
+    
+    //Declaring the executor.
     private final ScheduledExecutorService scheduler;
 
+    //Constructor
     public AppointmentChecker() {
        
-        this.scheduler = Executors.newSingleThreadScheduledExecutor(); // Creates a single background thread
+        //Initializing the executor to run on its own thread so as to not clog up the rest of the app.
+        this.scheduler = Executors.newSingleThreadScheduledExecutor();
     }
 
+    //Scheduling the executor to run at set interval.
     public void startCheckingAppointments() {
-        // Schedule the task to run every 30 minutes with a delay of 0 (start immediately)
+        
+        //Every 30 minutes, run checkAppointments.
         scheduler.scheduleAtFixedRate(this::checkAppointments, 0, 30, TimeUnit.MINUTES);
     }
 
+    //Actual method to check if any appointments are late.
     private void checkAppointments() {
-        // Perform the task in the background
+        
+        //Getting the current time.
         LocalDateTime currentTime = LocalDateTime.now();
 
-        // Assuming BloodTestCenter.todaysApps is a list of today's appointments
+        //Creating a deep copy of the appointments for today to safely iterate through. I've had issues removing items from arraylists while itterating through said list, this is the solution.
         List<Appointment> todaysAppointments = BloodTestCenter.todaysApps;
-
         Iterator<Appointment> iterator = todaysAppointments.iterator();
+        
+        //Iterating through list.
         while (iterator.hasNext()) {
-            Appointment appointment = iterator.next();
-            if (appointment.getTime().isBefore(currentTime)) { // Check if the appointment time has passed
-                BloodTestCenter.lateApps.enqueue(appointment);
-                iterator.remove(); // Remove the missed appointment from today's list
-                appointment.getPatient().missedAppointments.push(appointment);
+            Appointment appointment = iterator.next();//Getting next appointment.
+            if (appointment.getTime().isBefore(currentTime)) { //If the time scheduled for the appointment is in the past.
+                BloodTestCenter.lateApps.enqueue(appointment);//Put the appointment in the late queue.
+                iterator.remove(); //Remove it from todays appointments.
+                appointment.getPatient().missedAppointments.push(appointment);//Push appointment in Patient's missed appointments.
             }
         }
 
        
     }
 
-    public void shutdown() {
-        scheduler.shutdown(); // Gracefully shut down the executor when it's no longer needed
-    }
 }

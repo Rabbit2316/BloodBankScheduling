@@ -10,6 +10,7 @@ import ApplicationLogic.Appointment;
 import GUI.BloodCenterGUIComponents.TodaysAppointments.TodaysAppointmentsFrame;
 import ApplicationLogic.BloodTestCenter;
 import GUI.BloodCenterGUIComponents.LateAppointments.LateAppointmentsFrame;
+import GUI.LoginPanel;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,46 +37,54 @@ public class BloodCenterPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        todaysAppsBtn = new javax.swing.JButton();
+        checkPatientInBtn = new javax.swing.JButton();
+        waitingAppsBtn = new javax.swing.JButton();
+        pollNextAppBtn = new javax.swing.JButton();
+        lateAppsBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 255, 204));
 
-        jButton1.setText("Today's Appointments");
+        todaysAppsBtn.setText("Today's Appointments");
+        todaysAppsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                todaysAppsBtnActionPerformed(evt);
+            }
+        });
+
+        checkPatientInBtn.setText("Check Patient In");
+        checkPatientInBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkPatientInBtnActionPerformed(evt);
+            }
+        });
+
+        waitingAppsBtn.setText("Waiting Appointments");
+        waitingAppsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                waitingAppsBtnActionPerformed(evt);
+            }
+        });
+
+        pollNextAppBtn.setText("Poll Next Appointment");
+        pollNextAppBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pollNextAppBtnActionPerformed(evt);
+            }
+        });
+
+        lateAppsBtn.setText("Late Appointments");
+        lateAppsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lateAppsBtnActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Log Out");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Check Patient In");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Waiting Appointments");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Poll Next Appointment");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Late Appointments");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
             }
         });
 
@@ -84,20 +93,21 @@ public class BloodCenterPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addGap(65, 65, 65))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pollNextAppBtn)
+                            .addComponent(checkPatientInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(waitingAppsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                        .addGap(41, 41, 41)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lateAppsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                        .addGap(41, 41, 41)
+                        .addComponent(todaysAppsBtn)))
                 .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
@@ -107,32 +117,39 @@ public class BloodCenterPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(97, 97, 97)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(waitingAppsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(todaysAppsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(96, 96, 96)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(463, Short.MAX_VALUE))
+                        .addComponent(lateAppsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(98, 98, 98)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(checkPatientInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(pollNextAppBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    //This metthod brings up a display outputting the appointments in the todaysApps arraylist.
+    private void todaysAppsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_todaysAppsBtnActionPerformed
         TodaysAppointmentsFrame frame = new TodaysAppointmentsFrame();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_todaysAppsBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    //Button for bringing up check patient in display.
+    private void checkPatientInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkPatientInBtnActionPerformed
         CheckBBPatientInFrame frame = new CheckBBPatientInFrame();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_checkPatientInBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    //Button brings up display for waitingPatients priority queue. 
+    private void waitingAppsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_waitingAppsBtnActionPerformed
         WaitingAppointmentsFrame frame = new WaitingAppointmentsFrame();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_waitingAppsBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    //Button for removing next person up in the priority queue.
+    private void pollNextAppBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pollNextAppBtnActionPerformed
         if(!BloodTestCenter.waitingApps.isEmpty()) {
            Appointment app = (Appointment) BloodTestCenter.waitingApps.dequeue();
             int option = JOptionPane.showConfirmDialog(null, app.getPatient().getName()+" is in for their test", "Confirm", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -143,19 +160,27 @@ public class BloodCenterPanel extends javax.swing.JPanel {
         else {
             JOptionPane.showConfirmDialog(null, "No patients are waiting for an appointment.", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
         }
+        BloodTestCenter.waitingApps.printPQ();
+    }//GEN-LAST:event_pollNextAppBtnActionPerformed
 
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void lateAppsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lateAppsBtnActionPerformed
         LateAppointmentsFrame frame = new LateAppointmentsFrame();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_lateAppsBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        LoginPanel.mainFrame.cardLayout.show(LoginPanel.mainFrame.mainPanel, "loginPanel");
+        BloodTestCenter.todaysApps.clear();
+        BloodTestCenter.waitingApps.theQueue.clear();
+        BloodTestCenter.lateApps.theQueue.clear();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton checkPatientInBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton lateAppsBtn;
+    private javax.swing.JButton pollNextAppBtn;
+    private javax.swing.JButton todaysAppsBtn;
+    private javax.swing.JButton waitingAppsBtn;
     // End of variables declaration//GEN-END:variables
 }

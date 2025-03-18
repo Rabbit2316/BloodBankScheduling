@@ -1,5 +1,6 @@
 package DoubleLinkedList;
 
+//DLL Interface
 public interface DoubleLinkedListInterface {
 
     public boolean isEmpty();

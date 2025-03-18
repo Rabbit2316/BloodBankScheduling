@@ -9,7 +9,7 @@ package PriorityQueue;
  * @author owen
  */
 public class PQElement {
-    private int priority;
+    public int priority;
     private Object data;
     
     public PQElement(int p, Object d) {

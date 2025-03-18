@@ -1,5 +1,6 @@
 package BinarySearchTree;
 
+//Node class for the BST.
 public class BinarySearchTreeNode {
     private Object data;
     private int value;
@@ -12,6 +13,7 @@ public class BinarySearchTreeNode {
         leftChild = null;
         rightChild = null;
     }
+    
     public Object getData() {
         return data;
     }

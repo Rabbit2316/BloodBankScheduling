@@ -10,7 +10,6 @@ public class LateAppointmentsQueue extends MyQueue {
             if (theQueue.size() == 5) {
                 theQueue.add(obj);
                 Appointment app = (Appointment) theQueue.get(0);
-                app.moveToMissedAppointments();
                 theQueue.remove(0);
             }
             else {
